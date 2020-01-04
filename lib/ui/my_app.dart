@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_management/ui/movie/detail/view/detail_page.dart';
 import 'package:state_management/ui/movie/list/view/movie_list_page.dart';
+import 'package:state_management/ui/utils/presentation_constants.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       this._initApp = false;
     }
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: PresentationConstants.APP_NAME,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.brown,

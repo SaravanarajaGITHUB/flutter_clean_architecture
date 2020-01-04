@@ -1,4 +1,6 @@
 class PresentationConstants {
+  static const APP_NAME = 'WMDB';
+  static const MOVIES = 'Movies';
   static const MOVIE_DETAIL = 'Movie Detail';
   static const RATING = 'Rating:';
   static const YEAR = 'Year:';

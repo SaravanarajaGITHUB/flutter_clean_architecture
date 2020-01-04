@@ -14,4 +14,10 @@ class MovieRepositoryImpl implements MovieRepository {
     final movieEntities = await this._dataStore.getMovies();
     return this._dataToDomainMapper.transformMovies(movieEntities);
   }
+
+  @override
+  Future<Movie> getMovie(String title) async {
+    final movieEntity = await this._dataStore.getMovie(title);
+    return this._dataToDomainMapper.transformMovie(movieEntity);
+  }
 }

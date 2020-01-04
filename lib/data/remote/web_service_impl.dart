@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:state_management/data/service/app_exception.dart';
-import 'package:state_management/data/service/web_service.dart';
+import 'package:state_management/data/remote/app_exception.dart';
+import 'package:state_management/data/remote/web_service.dart';
 
 class WebServiceImpl implements WebService {
   final String _baseUrl = "https://api.androidhive.info";

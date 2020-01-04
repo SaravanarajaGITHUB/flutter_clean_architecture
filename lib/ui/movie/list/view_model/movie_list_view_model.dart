@@ -1,21 +1,20 @@
-import 'package:flutter/foundation.dart';
-import 'package:state_management/data/repo/movie_repository.dart';
-import 'package:state_management/data/service/api_response.dart';
-import 'package:state_management/domain/model/movie.dart';
-import 'package:state_management/view_model/base_view_model.dart';
-import 'package:state_management/view_model/view_state.dart';
+import 'package:state_management/domain/model/response.dart';
+import 'package:state_management/domain/usecase/movie/movie_use_case.dart';
+import 'package:state_management/ui/helper/base_view_model.dart';
+import 'package:state_management/ui/helper/view_state.dart';
+import 'package:state_management/ui/model/movie_model.dart';
 
 class MovieListViewModel extends BaseViewModel {
   bool _isGrid = true;
   bool _animateList = true;
-  ApiResponse<List<Movie>> _movies;
-  final MovieRepository _movieRepo;
+  Response<List<MovieModel>> _movies;
+  final MovieUseCase _movieUseCase;
 
-  MovieListViewModel(this._movieRepo);
+  MovieListViewModel(this._movieUseCase);
 
   bool get isGrid => this._isGrid;
 
-  ApiResponse<List<Movie>> get movies => this._movies;
+  Response<List<MovieModel>> get movies => this._movies;
 
   set animateList(bool animateList) => this._animateList = animateList;
 
@@ -23,13 +22,7 @@ class MovieListViewModel extends BaseViewModel {
 
   Future<void> getMovies() async {
     setState(ViewState.BUSY);
-    try {
-      final movies = await this._movieRepo.getMovies();
-      this._movies = ApiResponse.completed(data: movies);
-    } catch (e) {
-      this._movies = ApiResponse.error(message: e.toString());
-      debugPrint(e.toString());
-    }
+    this._movies = await this._movieUseCase.getMovies();
     setState(ViewState.IDLE);
   }
 

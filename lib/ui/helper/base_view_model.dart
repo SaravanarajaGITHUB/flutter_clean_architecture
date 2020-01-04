@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:state_management/view_model/view_state.dart';
+import 'package:state_management/ui/helper/view_state.dart';
 
 class BaseViewModel extends ChangeNotifier {
   ViewState _state = ViewState.IDLE;

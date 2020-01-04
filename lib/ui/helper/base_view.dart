@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/locator.dart';
-import 'package:state_management/view_model/base_view_model.dart';
+import 'package:state_management/ui/helper/base_view_model.dart';
 
 class BaseView<T extends BaseViewModel> extends StatelessWidget {
   final Widget Function(BuildContext context, T model, Widget widget) _builder;

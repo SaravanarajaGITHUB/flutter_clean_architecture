@@ -1,5 +1,5 @@
 import 'package:state_management/data/model/movie_entity.dart';
-import 'package:state_management/data/service/app_exception.dart';
+import 'package:state_management/data/remote/app_exception.dart';
 import 'package:state_management/data/utils/data_constants.dart';
 import 'package:state_management/domain/model/movie.dart';
 import 'package:state_management/domain/utils/domain_constants.dart';
@@ -7,11 +7,11 @@ import 'package:state_management/domain/utils/domain_constants.dart';
 class DataToDomainMapper {
   List<Movie> transformMovies(List<MovieEntity> movieEntities) {
     return movieEntities
-        .map((movieEntity) => this._transformMovie(movieEntity))
+        .map((movieEntity) => this.transformMovie(movieEntity))
         .toList();
   }
 
-  Movie _transformMovie(MovieEntity movieEntity) {
+  Movie transformMovie(MovieEntity movieEntity) {
     return Movie(
         title: movieEntity.title,
         image: movieEntity.image,

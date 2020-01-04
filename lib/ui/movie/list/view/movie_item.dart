@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:state_management/ui/utils/presentation_constants.dart';
 
 class MovieItem extends StatelessWidget {
   final String _title;
@@ -74,7 +75,7 @@ class MovieItem extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 4.0),
                         child: Text(
-                          'Rating: ${this._rating}',
+                          '${PresentationConstants.RATING} ${this._rating}',
                           textAlign: TextAlign.start,
                           style: Theme.of(context).textTheme.caption.copyWith(
                                 color: Colors.black,

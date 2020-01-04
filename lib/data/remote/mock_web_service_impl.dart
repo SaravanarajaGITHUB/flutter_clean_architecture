@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:state_management/data/service/web_service.dart';
+import 'package:state_management/data/remote/web_service.dart';
 
 class MockWebServiceImpl implements WebService {
   final AssetBundle _assetBundle;

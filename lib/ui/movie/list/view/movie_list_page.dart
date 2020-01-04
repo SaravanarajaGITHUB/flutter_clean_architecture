@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:state_management/data/service/api_response.dart';
-import 'package:state_management/domain/model/movie.dart';
-import 'package:state_management/state_view.dart';
+import 'package:state_management/domain/model/response.dart';
+import 'package:state_management/ui/helper/base_view.dart';
+import 'package:state_management/ui/helper/view_state.dart';
+import 'package:state_management/ui/model/movie_model.dart';
 import 'package:state_management/ui/movie/detail/view/detail_page.dart';
 import 'package:state_management/ui/movie/list/view/movie_item.dart';
 import 'package:state_management/ui/movie/list/view_model/movie_list_view_model.dart';
-import 'package:state_management/view_model/base_view.dart';
+import 'package:state_management/ui/utils/presentation_constants.dart';
 
 class MovieListPage extends StatelessWidget {
   static const routeName = '/';
@@ -17,18 +18,17 @@ class MovieListPage extends StatelessWidget {
     return BaseView<MovieListViewModel>(
       onModelReady: (model) => model.getMovies(),
       builder: (buildContext, model, widget) => Scaffold(
-          appBar: AppBar(
-            title: Text('Movies'),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(model.isGrid ? Icons.grid_on : Icons.list),
-                  onPressed: () => model.changeGridStatus())
-            ],
-          ),
-          body: StateView(
-            viewState: model.state,
-            onBusy: this._buildBusyWidget(),
-            onIdle: Status.COMPLETED == model.movies.status
+        appBar: AppBar(
+          title: Text(PresentationConstants.MOVIES),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(model.isGrid ? Icons.grid_on : Icons.list),
+                onPressed: () => model.changeGridStatus())
+          ],
+        ),
+        body: ViewState.BUSY == model.state
+            ? this._buildBusyWidget()
+            : Status.COMPLETED == model.movies.status
                 ? AnimationLimiter(
                     key: this._createUniqueKey(model),
                     child: model.isGrid
@@ -79,7 +79,7 @@ class MovieListPage extends StatelessWidget {
                                   ),
                                 )))
                 : this._buildErrorWidget(context, model.movies.message),
-          )),
+      ),
     );
   }
 
@@ -113,14 +113,15 @@ class MovieListPage extends StatelessWidget {
     );
   }
 
-  Widget _itemBuilder(BuildContext context, Movie movie, bool isGrid) => Hero(
+  Widget _itemBuilder(BuildContext context, MovieModel movie, bool isGrid) =>
+      Hero(
         tag: movie.image,
         child: isGrid
             ? MovieItem.grid(
                 title: movie.title,
                 imageUrl: movie.image,
                 onTap: () => Navigator.of(context)
-                    .pushNamed(DetailPage.route_name, arguments: movie),
+                    .pushNamed(DetailPage.route_name, arguments: movie.title),
               )
             : MovieItem.list(
                 title: movie.title,
@@ -129,7 +130,7 @@ class MovieListPage extends StatelessWidget {
                 rating: movie.rating,
                 year: movie.releaseYear,
                 onTap: () => Navigator.of(context)
-                    .pushNamed(DetailPage.route_name, arguments: movie),
+                    .pushNamed(DetailPage.route_name, arguments: movie.title),
               ),
       );
 

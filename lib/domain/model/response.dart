@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class ApiResponse<T> {
+class Response<T> {
   final Status _status;
   T _data;
   String _message;
@@ -11,11 +11,11 @@ class ApiResponse<T> {
 
   String get message => this._message;
 
-  ApiResponse.completed({@required T data})
+  Response.completed({@required T data})
       : this._data = data,
         this._status = Status.COMPLETED;
 
-  ApiResponse.error({@required String message})
+  Response.error({@required String message})
       : this._message = message,
         this._status = Status.ERROR;
 
