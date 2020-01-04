@@ -1,6 +1,6 @@
-# state_management
+# Flutter Clean Architecture
 
-Test App for state management
+Run App on Web and Mock Data
 
 ## Getting Started
 
